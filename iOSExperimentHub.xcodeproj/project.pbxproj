@@ -36,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2D1CDD9E2BCC54600097FBF9 /* Combine.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Combine.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		690A0D662BA98FEF0022141C /* iOSExperimentHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSExperimentHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		690A0D692BA98FEF0022141C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		690A0D6B2BA98FEF0022141C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +77,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D1CDD9D2BCC544F0097FBF9 /* Playground */ = {
+			isa = PBXGroup;
+			children = (
+				2D1CDD9E2BCC54600097FBF9 /* Combine.playground */,
+			);
+			path = Playground;
+			sourceTree = "<group>";
+		};
 		690A0D5D2BA98FEF0022141C = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +108,7 @@
 		690A0D682BA98FEF0022141C /* iOSExperimentHub */ = {
 			isa = PBXGroup;
 			children = (
+				2D1CDD9D2BCC544F0097FBF9 /* Playground */,
 				690A0D692BA98FEF0022141C /* AppDelegate.swift */,
 				690A0D6B2BA98FEF0022141C /* SceneDelegate.swift */,
 				690A0D6D2BA98FEF0022141C /* ViewController.swift */,
