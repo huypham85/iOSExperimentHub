@@ -1,4 +1,5 @@
 import Combine
+import UIKit
 import Foundation
 
 enum MyError: Error {
@@ -31,6 +32,10 @@ let cancellable = URLSession.shared.dataTaskPublisher(for: url)
     })
 
 // replace error
-let publisher = URLSession.shared.dataTaskPublisher(for: url)
-    .map(\.data)
-    .replaceError(with: Data())
+URLSession.shared
+    .dataTaskPublisher(for: URL(string: "https://mydomain/image_654")!)
+    .map { result -> UIImage in
+        return UIImage(data: result.data) ?? UIImage(named: "placeholder-image")!
+    }
+    .replaceError(with: UIImage(named: "placeholder-image")!)
+    .sink(receiveCompletion: { print("received completion: \($0)") }, receiveValue: {print("received auth: \($0)")})
