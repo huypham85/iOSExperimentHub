@@ -40,6 +40,7 @@
 		2D1CDD9F2BCD967B0097FBF9 /* CustomSubscriber.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = CustomSubscriber.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		2DCB4D422BE186BE00D3FF4D /* MapErrorCombine.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MapErrorCombine.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		2DCB4D432BE4079800D3FF4D /* RetryRequest.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = RetryRequest.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		2DCB4D442BF0701000D3FF4D /* CombineSchedulerr.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = CombineSchedulerr.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		690A0D662BA98FEF0022141C /* iOSExperimentHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSExperimentHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		690A0D692BA98FEF0022141C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		690A0D6B2BA98FEF0022141C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -87,6 +88,7 @@
 				2D1CDD9F2BCD967B0097FBF9 /* CustomSubscriber.playground */,
 				2DCB4D422BE186BE00D3FF4D /* MapErrorCombine.playground */,
 				2DCB4D432BE4079800D3FF4D /* RetryRequest.playground */,
+				2DCB4D442BF0701000D3FF4D /* CombineSchedulerr.playground */,
 			);
 			path = Playground;
 			sourceTree = "<group>";
