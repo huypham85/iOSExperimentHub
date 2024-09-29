@@ -9,28 +9,61 @@ import XCTest
 @testable import iOSExperimentHub
 
 final class iOSExperimentHubTests: XCTestCase {
+    /*
+     1 mảng số nguyên
+     1 số s
+     tìm ra 2 số đầu tiên có tổng là s
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
+     [2, 7, 8, 15] , s = 9
+     duyệt qua mảng
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+     map[2] = 0
+     map[7] = 1
+     ....
+     
+     */
+    class Solution {
+        func findTwoSum(_ array: [Int], _ target: Int) -> [Int] {
+            var map: [Int: Int] = [:]
+            
+            for i in 0 ..< array.count {
+                let sub = target - array[i]
+                if let index = map[sub] {
+                    return [i, index]
+                }
+                
+                map[array[i]] = i
+            }
+            
+            return []
         }
     }
 
+    func testExample1() throws {
+        let s = Solution()
+        let array = [2, 7, 8, 15]
+        let target = 9
+        XCTAssertEqual(s.findTwoSum(array, target), [1,0])
+    }
+    
+    func testExample2() throws {
+        let s = Solution()
+        let array = [2, 7, 8, 1]
+        let target = 9
+        XCTAssertEqual(s.findTwoSum(array, target), [1,0])
+    }
+    
+    func testExample3() throws {
+        let s = Solution()
+        let array = [8, 7, 2, 10, 1]
+        let target = 9
+        XCTAssertEqual(s.findTwoSum(array, target), [2, 1])
+    }
+    
+    func testExample4() throws {
+        let s = Solution()
+        let array = [8, 7, 2, 10, 1]
+        let target = 20
+        XCTAssertEqual(s.findTwoSum(array, target), [])
+    }
 }
