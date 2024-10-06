@@ -10,11 +10,26 @@ import UIKit
 class CountryListViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     let refreshControl = UIRefreshControl()
+    private var countries: [Country] = []
+    let countryFetcher = CountryFetcher()
+    
+    private var activeContinuation: CheckedContinuation<[Country], Error>?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+        Task {
+            do {
+                self.countries = try await fetchCountries()
+                self.tableView.reloadData()
+            } catch(let error) {
+                print("fetch countries error: \(error)")
+            }
+        }
         refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
         tableView.refreshControl = refreshControl
+        countryFetcher.delegate = self
 
     }
     
@@ -27,6 +42,13 @@ class CountryListViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "CountryListTableViewCell", bundle: nil), forCellReuseIdentifier: "CountryListTableViewCell")
+    }
+    
+    func fetchCountries() async throws -> [Country] {
+        try await withCheckedThrowingContinuation { continuation in
+            self.activeContinuation = continuation
+            self.countryFetcher.fetchCountries()
+        }
     }
     
     @objc private func refreshData(_ sender: Any) {
@@ -46,7 +68,9 @@ extension CountryListViewController: UITableViewDelegate, UITableViewDataSource 
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CountryListTableViewCell", for: indexPath) as? CountryListTableViewCell else {
             return UITableViewCell()
         }
-        cell.setData(countries[indexPath.row])
+        Task {
+            await cell.setData(countries[indexPath.row])
+        }
         return cell
     }
     
@@ -58,4 +82,19 @@ extension CountryListViewController: UITableViewDelegate, UITableViewDataSource 
 //        tableView.deselectRow(at: indexPath, animated: true)
         print("Tapped the country \(countries[indexPath.row].name)")
     }
+}
+
+extension CountryListViewController: CountryFetcherDelegate {
+    func onLoadSuccessfully(countries: [Country]) {
+        self.activeContinuation?.resume(returning: countries)
+        self.activeContinuation = nil
+    }
+    
+    func onLoadError(error: CountryFetcherError) {
+        self.activeContinuation?.resume(throwing: error)
+        self.activeContinuation = nil
+    }
+    
+    
+    
 }

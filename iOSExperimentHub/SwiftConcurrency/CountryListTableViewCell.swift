@@ -28,21 +28,22 @@ class CountryListTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setData(_ country: Country) {
+    func setData(_ country: Country) async {
         countryLabel.text = country.name
-        fetchThumbnail(for: country.thumbnailURL) { [weak self] image, _ in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                self?.thumbnailImageView.image = image
-                self?.activityIndicator.stopAnimating()
-            }
-        }
-//        Task {
-//            do {
-//                thumbnailImageView.image = try await fetchThumbnail(for: country.thumbnailURL)
-//                activityIndicator.stopAnimating()
-//            } catch {
-//                print("Error while fetching image")
+//        fetchThumbnail(for: country.thumbnailURL) { [weak self] image, _ in
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+//                self?.thumbnailImageView.image = image
+//                self?.activityIndicator.stopAnimating()
 //            }
+//        }
+        
+//        Task {
+            do {
+                thumbnailImageView.image = try await fetchThumbnail(for: country.thumbnailURL)
+                activityIndicator.stopAnimating()
+            } catch {
+                print("Error while fetching image")
+            }
 //        }
     }
     
@@ -58,30 +59,21 @@ class CountryListTableViewCell: UITableViewCell {
         return request
     }
     
-    func fetchThumbnail(for url: String, completion: @escaping (UIImage?, Error?) -> Void) {
+    func fetchThumbnail(for url: String) async throws -> UIImage {
         activityIndicator.startAnimating()
         
         let request = thumbnailURLRequest(from: url)!
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                completion(nil, error)
-            } else if (response as? HTTPURLResponse)?.statusCode != 200 {
-                completion(nil, FetchError.badID)
-            } else {
-                guard let image = UIImage(data: data!) else {
-                    completion(nil, FetchError.badImage)
-                    return
-                }
-                image.prepareThumbnail(of: CGSize(width: 40, height: 40)) { thumbnail in
-                    guard let thumbnail = thumbnail else {
-                        completion(nil, FetchError.badImage)
-                        return
-                    }
-                    completion(thumbnail, nil)
+        return try await withCheckedThrowingContinuation { continuation in
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    continuation.resume(throwing: error)
+                } else {
+                    // ⚠️ oh no forget to call resume
+                    continuation.resume(returning: UIImage(data: data!)!)
                 }
             }
+            task.resume()
         }
-        task.resume()
     }
     
     func fetchThumbnail(for url: String, completion: @escaping (Result<UIImage, Error>) -> Void) {
@@ -110,16 +102,13 @@ class CountryListTableViewCell: UITableViewCell {
     }
     
     
-    func fetchThumbnail(for url: String) async throws -> UIImage {
-        activityIndicator.startAnimating()
-        let request = thumbnailURLRequest(from: url)!
-        try await Task.sleep(nanoseconds: 5_000_000_000)
-        print("sleep complete")
-        let (data, response) = try await URLSession.shared.data(for: request)
-        print("get data url complete")
-        guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw FetchError.badID }
-        let maybeImage = UIImage(data: data)
-        guard let thumbnail = await maybeImage?.thumbnail else { throw FetchError.badImage }
-        return thumbnail
-    }
+//    func fetchThumbnail(for url: String) async throws -> UIImage {
+//        activityIndicator.startAnimating()
+//        let request = thumbnailURLRequest(from: url)!
+//        let (data, response) = try await URLSession.shared.data(for: request)
+//        guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw FetchError.badID }
+//        let maybeImage = UIImage(data: data)
+//        guard let thumbnail = await maybeImage?.thumbnail else { throw FetchError.badImage }
+//        return thumbnail
+//    }
 }

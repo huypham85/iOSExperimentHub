@@ -13,6 +13,8 @@
 		2DDF265E2CA7FCDE0035DD7C /* CountryListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DDF265C2CA7FCDE0035DD7C /* CountryListTableViewCell.swift */; };
 		2DDF265F2CA7FCDE0035DD7C /* CountryListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DDF265D2CA7FCDE0035DD7C /* CountryListTableViewCell.xib */; };
 		2DDF26612CA80C310035DD7C /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DDF26602CA80C310035DD7C /* UIImage+Extensions.swift */; };
+		2DDF26642CB135A80035DD7C /* ThumbnailFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DDF26632CB135A80035DD7C /* ThumbnailFetcher.swift */; };
+		2DDF26662CB140CE0035DD7C /* CountryFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DDF26652CB140CE0035DD7C /* CountryFetcher.swift */; };
 		690A0D6A2BA98FEF0022141C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690A0D692BA98FEF0022141C /* AppDelegate.swift */; };
 		690A0D6C2BA98FEF0022141C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690A0D6B2BA98FEF0022141C /* SceneDelegate.swift */; };
 		690A0D6E2BA98FEF0022141C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690A0D6D2BA98FEF0022141C /* ViewController.swift */; };
@@ -53,6 +55,8 @@
 		2DDF265C2CA7FCDE0035DD7C /* CountryListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryListTableViewCell.swift; sourceTree = "<group>"; };
 		2DDF265D2CA7FCDE0035DD7C /* CountryListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CountryListTableViewCell.xib; sourceTree = "<group>"; };
 		2DDF26602CA80C310035DD7C /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
+		2DDF26632CB135A80035DD7C /* ThumbnailFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ThumbnailFetcher.swift; path = ../../../../../Downloads/ThumbnailFetcher.swift; sourceTree = "<group>"; };
+		2DDF26652CB140CE0035DD7C /* CountryFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryFetcher.swift; sourceTree = "<group>"; };
 		690A0D662BA98FEF0022141C /* iOSExperimentHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSExperimentHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		690A0D692BA98FEF0022141C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		690A0D6B2BA98FEF0022141C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +120,7 @@
 		2DDF26552CA7F3F70035DD7C /* SwiftConcurrency */ = {
 			isa = PBXGroup;
 			children = (
+				2DDF26622CB135760035DD7C /* Task */,
 				2DDF26562CA7F90F0035DD7C /* CountryListViewController.swift */,
 				2DDF26572CA7F90F0035DD7C /* CountryListViewController.xib */,
 				2DDF265A2CA7FB570035DD7C /* Country.swift */,
@@ -124,6 +129,15 @@
 				2DDF26602CA80C310035DD7C /* UIImage+Extensions.swift */,
 			);
 			path = SwiftConcurrency;
+			sourceTree = "<group>";
+		};
+		2DDF26622CB135760035DD7C /* Task */ = {
+			isa = PBXGroup;
+			children = (
+				2DDF26632CB135A80035DD7C /* ThumbnailFetcher.swift */,
+				2DDF26652CB140CE0035DD7C /* CountryFetcher.swift */,
+			);
+			path = Task;
 			sourceTree = "<group>";
 		};
 		690A0D5D2BA98FEF0022141C = {
@@ -314,7 +328,9 @@
 				2DDF26612CA80C310035DD7C /* UIImage+Extensions.swift in Sources */,
 				690A0D6A2BA98FEF0022141C /* AppDelegate.swift in Sources */,
 				2DDF265B2CA7FB570035DD7C /* Country.swift in Sources */,
+				2DDF26642CB135A80035DD7C /* ThumbnailFetcher.swift in Sources */,
 				690A0D6C2BA98FEF0022141C /* SceneDelegate.swift in Sources */,
+				2DDF26662CB140CE0035DD7C /* CountryFetcher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
