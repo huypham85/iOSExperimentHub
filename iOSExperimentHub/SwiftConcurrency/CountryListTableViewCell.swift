@@ -59,6 +59,32 @@ class CountryListTableViewCell: UITableViewCell {
         return request
     }
     
+    func fetchThumbnail(for url: String, completion: @escaping (UIImage?, Error?) -> Void) {
+        activityIndicator.startAnimating()
+        
+        let request = thumbnailURLRequest(from: url)!
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(nil, error)
+            } else if (response as? HTTPURLResponse)?.statusCode != 200 {
+                completion(nil, FetchError.badID)
+            } else {
+                guard let image = UIImage(data: data!) else {
+                    completion(nil, FetchError.badImage)
+                    return
+                }
+                image.prepareThumbnail(of: CGSize(width: 40, height: 40)) { thumbnail in
+                    guard let thumbnail = thumbnail else {
+                        completion(nil, FetchError.badImage)
+                        return
+                    }
+                    completion(thumbnail, nil)
+                }
+            }
+        }
+        task.resume()
+    }
+    
     func fetchThumbnail(for url: String) async throws -> UIImage {
         activityIndicator.startAnimating()
         
